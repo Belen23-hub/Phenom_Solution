@@ -18,6 +18,11 @@ server.use(morgan('dev'));
 // Have the server use bodyParser.json()
 server.use(bodyParser.json());
 
+// Import cors
+const cors = require('cors');
+// Have the server use cors()
+server.use(cors());
+
 // Have the server use your api router with prefix '/api'
 server.use('/api', require('./api'));
 

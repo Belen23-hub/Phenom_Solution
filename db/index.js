@@ -192,7 +192,7 @@ async function createReportComment(reportId, commentFields) {
 
     // if it wasn't found, throw an error saying so
     if (!report) {
-      throw Error('That report does not exists, no comment has been made');
+      throw Error('That report does not exist, no comment has been made');
     }
 
     // if it is not open, throw an error saying so
@@ -224,13 +224,14 @@ async function createReportComment(reportId, commentFields) {
     // finally, return the comment
     return comment;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
 // export the client and all database functions below
 module.exports = {
   client,
+  _getReport,
   createReport,
   closeReport,
   getOpenReports,
