@@ -97,8 +97,9 @@ async function createReport(reportFields) {
 }
 
 /**
- * NOTE: This function is not for export, so we use an _ to 
+ * NOTE: This function is not for use in other files, so we use an _ to
  * remind us that it is only to be used internally.
+ * (for our testing purposes, though, we WILL export it)
  * 
  * It is used in both closeReport and createReportComment, below.
  * 
@@ -131,8 +132,7 @@ async function _getReport(reportId) {
  * If the report is updated this way, return an object
  * with a message of "Success".
  * 
- * If nothing is updated this way, throw an error with
- * message "Report not found OR password does not match."
+ * If nothing is updated this way, throw an error
  */
 async function closeReport(reportId, password) {
   try {
@@ -175,8 +175,7 @@ async function closeReport(reportId, password) {
  */
 
 /**
- * If the report is not found, or is closed or expired, throw an error saying 
- * that the report is
+ * If the report is not found, or is closed or expired, throw an error
  * 
  * Otherwise, create a new comment with the correct
  * reportId, and update the expirationDate of the original
@@ -192,7 +191,7 @@ async function createReportComment(reportId, commentFields) {
 
     // if it wasn't found, throw an error saying so
     if (!report) {
-      throw Error('That report does not exists, no comment has been made');
+      throw Error('That report does not exist, no comment has been made');
     }
 
     // if it is not open, throw an error saying so
@@ -224,13 +223,14 @@ async function createReportComment(reportId, commentFields) {
     // finally, return the comment
     return comment;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
 // export the client and all database functions below
 module.exports = {
   client,
+  _getReport,
   createReport,
   closeReport,
   getOpenReports,

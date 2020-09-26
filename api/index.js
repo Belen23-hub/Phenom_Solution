@@ -58,8 +58,6 @@ apiRouter.delete('/reports/:reportId', async (req, res, next) => {
     const { reportId } = req.params;
     const { password } = req.body;
 
-    console.log(reportId, password);
-
     const result = await closeReport(reportId, password);
     res.send(result);
   } catch (error) {
