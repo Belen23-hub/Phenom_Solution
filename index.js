@@ -29,16 +29,14 @@ server.use('/api', require('./api'));
 // Import the client from your db/index.js
 const { client } = require('./db');
 
-// Create custom 404, send an error message in an object
-// { error: "route not found" }
+// Create custom 404 handler that sets the status code to 404.
 server.use('*', (req, res, next) => {
   res.status(404);
   res.send({ error: 'route not found' })
 });
 
-// Create custom error handling that returns the error
-// as an object, with status code of 500
-// { error: "the error message" }
+// Create custom error handling that sets the status code to 500
+// and returns the error as an object
 server.use((error, req, res, next) => {
   res.status(500);
   res.send({ error: error.message });
